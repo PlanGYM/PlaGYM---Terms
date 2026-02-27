@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlanGYM — Política de Privacidade</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;900&family=Lexend+Mega:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue:    #137FEC;
+      --green:   #0DF259;
+      --dark:    #080C14;
+      --surface: #0D1520;
+      --card:    #111B2A;
+      --border:  #1A2840;
+      --text:    #E8EFF8;
+      --muted:   #5A7A9A;
+      --danger:  #FF4D6D;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Lexend', sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Background grid ─────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(19,127,236,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(19,127,236,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Glow orbs ───────────────────────────────────────────────── */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb-1 {
+      width: 600px; height: 600px;
+      background: rgba(19,127,236,0.12);
+      top: -200px; left: -200px;
+    }
+    .orb-2 {
+      width: 500px; height: 500px;
+      background: rgba(13,242,89,0.06);
+      bottom: 20%; right: -150px;
+    }
+
+    /* ── Header ──────────────────────────────────────────────────── */
+    header {
+      position: relative;
+      z-index: 10;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,12,20,0.8);
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 32px; height: 32px;
+      background: var(--blue);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon svg { width: 18px; height: 18px; fill: white; }
+
+    .logo-name {
+      font-family: 'Lexend Mega', sans-serif;
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+
+    .logo-name span { color: var(--blue); }
+
+    .header-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ── Hero ────────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 24px 56px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(19,127,236,0.10);
+      border: 1px solid rgba(19,127,236,0.25);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.1s;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--blue);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-family: 'Lexend Mega', sans-serif;
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      color: var(--text);
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.2s;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--blue);
+    }
+
+    .hero-sub {
+      margin-top: 20px;
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 520px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.35s;
+    }
+
+    .hero-meta {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.5s;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .meta-item svg { width: 14px; height: 14px; stroke: var(--muted); fill: none; }
+
+    .meta-dot {
+      width: 3px; height: 3px;
+      background: var(--border);
+      border-radius: 50%;
+    }
+
+    /* ── TOC ─────────────────────────────────────────────────────── */
+    .toc-bar {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto 16px;
+      padding: 0 24px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards 0.6s;
+    }
+
+    .toc-inner {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .toc-label {
+      width: 100%;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .toc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(19,127,236,0.06);
+      border: 1px solid rgba(19,127,236,0.14);
+      border-radius: 100px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--blue);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .toc-link:hover {
+      background: rgba(19,127,236,0.14);
+      border-color: rgba(19,127,236,0.35);
+      transform: translateY(-1px);
+    }
+
+    /* ── Main content ────────────────────────────────────────────── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .section {
+      margin-bottom: 12px;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    .section:nth-child(1)  { animation-delay: 0.65s; }
+    .section:nth-child(2)  { animation-delay: 0.72s; }
+    .section:nth-child(3)  { animation-delay: 0.79s; }
+    .section:nth-child(4)  { animation-delay: 0.86s; }
+    .section:nth-child(5)  { animation-delay: 0.93s; }
+    .section:nth-child(6)  { animation-delay: 1.00s; }
+    .section:nth-child(7)  { animation-delay: 1.07s; }
+    .section:nth-child(8)  { animation-delay: 1.14s; }
+
+    .section-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+
+    .section-card:hover {
+      border-color: rgba(19,127,236,0.25);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-num {
+      width: 36px; height: 36px;
+      background: rgba(19,127,236,0.12);
+      border: 1px solid rgba(19,127,236,0.25);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .section-header h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+
+    .section-body {
+      padding: 24px 28px;
+    }
+
+    .section-body p {
+      font-size: 14px;
+      color: rgba(232,239,248,0.75);
+      line-height: 1.85;
+      margin-bottom: 14px;
+    }
+
+    .section-body p:last-child { margin-bottom: 0; }
+
+    .section-body strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── Pill list ───────────────────────────────────────────────── */
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(19,127,236,0.07);
+      border: 1px solid rgba(19,127,236,0.18);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .pill::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--blue);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Highlight box ───────────────────────────────────────────── */
+    .highlight {
+      background: rgba(19,127,236,0.06);
+      border: 1px solid rgba(19,127,236,0.18);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 18px;
+      margin: 16px 0;
+      font-size: 13px;
+      color: rgba(232,239,248,0.8);
+      line-height: 1.7;
+    }
+
+    /* ── Warning box ─────────────────────────────────────────────── */
+    .warn {
+      background: rgba(255,77,109,0.06);
+      border: 1px solid rgba(255,77,109,0.20);
+      border-left: 3px solid var(--danger);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 18px;
+      margin: 16px 0;
+      font-size: 13px;
+      color: rgba(232,239,248,0.8);
+      line-height: 1.7;
+    }
+
+    /* ── Contact card ────────────────────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .contact-item {
+      background: rgba(19,127,236,0.05);
+      border: 1px solid rgba(19,127,236,0.14);
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+
+    .contact-item .c-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .contact-item .c-value {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--blue);
+    }
+
+    /* ── Footer ──────────────────────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+    }
+
+    .footer-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .footer-divider {
+      width: 1px; height: 14px;
+      background: var(--border);
+    }
+
+    .footer-right {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .footer-right span {
+      color: var(--blue);
+    }
+
+    /* ── Animations ──────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Scrollbar ───────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+    /* ── Responsive ──────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .hero { padding: 48px 20px 40px; }
+      .section-header { padding: 20px; }
+      .section-body { padding: 20px; }
+      .toc-inner { padding: 16px 20px; }
+      .hero-meta { gap: 12px; }
+      .meta-dot { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="#">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24"><path d="M6 4v6m0 4v6M18 4v6m0 4v6M2 10h4m12 0h4M2 14h4m12 0h4M10 10h4v4h-4z"/></svg>
+        </div>
+        <span class="logo-name">Plan<span>GYM</span></span>
+      </a>
+      <span class="header-badge">Política de Privacidade</span>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-tag">Documento Legal</div>
+    <h1>Sua privacidade<br>é <em>prioridade.</em></h1>
+    <p class="hero-sub">Este documento explica de forma clara e transparente como o PlanGYM coleta, utiliza e protege seus dados pessoais.</p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <svg viewBox="0 0 24 24" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        Última atualização: Fevereiro de 2026
+      </div>
+      <div class="meta-dot"></div>
+      <div class="meta-item">
+        <svg viewBox="0 0 24 24" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Leitura estimada: 5 minutos
+      </div>
+      <div class="meta-dot"></div>
+      <div class="meta-item">
+        <svg viewBox="0 0 24 24" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Conformidade com LGPD
+      </div>
+    </div>
+  </section>
+
+  <!-- TOC -->
+  <div class="toc-bar">
+    <div class="toc-inner">
+      <div class="toc-label">Índice</div>
+      <a class="toc-link" href="#s1">Informações Coletadas</a>
+      <a class="toc-link" href="#s2">Uso dos Dados</a>
+      <a class="toc-link" href="#s3">Compartilhamento</a>
+      <a class="toc-link" href="#s4">Segurança</a>
+      <a class="toc-link" href="#s5">Seus Direitos</a>
+      <a class="toc-link" href="#s6">Retenção</a>
+      <a class="toc-link" href="#s7">Menores de Idade</a>
+      <a class="toc-link" href="#s8">Contato</a>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <main>
+
+    <div class="section" id="s1">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-num">01</div>
+          <h2>Informações que Coletamos</h2>
+        </div>
+        <div class="section-body">
+          <p>Para oferecer a melhor experiência de treino e nutrição personalizada, o PlanGYM coleta as seguintes categorias de dados:</p>
+          <div class="pill-list">
+            <span class="pill">Nome e sobrenome</span>
+            <span class="pill">Endereço de e-mail</span>
+            <span class="pill">Foto de perfil</span>
+            <span class="pill">Dados de saúde e biometria</span>
+            <span class="pill">Histórico de treinos</span>
+            <span class="pill">Registro alimentar</span>
+            <span class="pill">Dados de assinatura</span>
+            <span class="pill">Interações com o PlanAI</span>
+          </div>
+          <p>Quando você utiliza o login com Google, recebemos apenas as informações que você autoriza durante o processo de autenticação: nome, e-mail e foto de perfil.</p>
+          <div class="highlight">
+            <strong>Dados de saúde:</strong> informações como peso, altura, IMC e metas físicas são coletadas exclusivamente para personalizar seus planos de treino e dieta. Esses dados são sensíveis e tratados com proteção adicional.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="s2">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-num">02</div>
+          <h2>Como Utilizamos seus Dados</h2>
+        </div>
+        <div class="section-body">
+          <p>Seus dados são utilizados exclusivamente para finalidades legítimas e transparentes:</p>
+          <div class="pill-list">
+            <span class="pill">Criar e gerenciar sua conta</span>
+            <span class="pill">Personalizar treinos e dietas</span>
+            <span class="pill">Processar assinaturas</span>
+            <span class="pill">Gerar respostas do PlanAI</span>
+            <span class="pill">Enviar notificações de treino</span>
+            <span class="pill">Melhorar o aplicativo</span>
+          </div>
+          <p>Não utilizamos seus dados para fins publicitários de terceiros. O PlanGYM não vende, aluga ou comercializa informações pessoais de nenhuma forma.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="s3">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-num">03</div>
+          <h2>Compartilhamento de Informações</h2>
+        </div>
+        <div class="section-body">
+          <p>Seus dados <strong>nunca são vendidos</strong> a terceiros. O compartilhamento ocorre apenas nas seguintes situações:</p>
+          <p><strong>Provedores de serviço:</strong> utilizamos o Supabase como infraestrutura de banco de dados e autenticação, e a API da Anthropic para o PlanAI. Ambos operam sob contratos de processamento de dados compatíveis com a LGPD.</p>
+          <p><strong>Google Play Billing:</strong> dados de transação são processados diretamente pelo Google conforme os termos de serviço do Google Play.</p>
+          <div class="warn">
+            <strong>Exigência legal:</strong> podemos divulgar informações quando exigido por lei, ordem judicial ou autoridade competente. Neste caso, você será notificado sempre que legalmente possível.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="s4">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-num">04</div>
+          <h2>Segurança dos Dados</h2>
+        </div>
+        <div class="section-body">
+          <p>Adotamos medidas técnicas e organizacionais para proteger seus dados contra acesso não autorizado, alteração, divulgação ou destruição:</p>
+          <div class="pill-list">
+            <span class="pill">Transmissão via HTTPS/TLS</span>
+            <span class="pill">Dados em repouso criptografados</span>
+            <span class="pill">Autenticação segura via Supabase Auth</span>
+            <span class="pill">Dados sensíveis em armazenamento seguro local</span>
+            <span class="pill">Row Level Security no banco de dados</span>
+          </div>
+          <p>Apesar de nossos esforços, nenhum sistema é 100% inviolável. Em caso de incidente de segurança que afete seus dados, você será notificado dentro do prazo estabelecido pela LGPD.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="s5">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-num">05</div>
+          <h2>Seus Direitos (LGPD)</h2>
+        </div>
+        <div class="section-body">
+          <p>Conforme a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você possui os seguintes direitos em relação aos seus dados:</p>
+          <div class="pill-list">
+            <span class="pill">Acesso aos dados</span>
+            <span class="pill">Correção de dados incorretos</span>
+            <span class="pill">Portabilidade</span>
+            <span class="pill">Anonimização</span>
+            <span class="pill">Exclusão completa</span>
+            <span class="pill">Revogação de consentimento</span>
+            <span class="pill">Informação sobre compartilhamento</span>
+          </div>
+          <div class="highlight">
+            <strong>Exclusão de conta:</strong> você pode solicitar a exclusão completa da sua conta e de todos os seus dados diretamente pelo aplicativo em <strong>Perfil → Configurações → Excluir Conta</strong>. A exclusão é imediata e irreversível.
+          </div>
+          <p>Para exercer qualquer outro direito, entre em contato conosco pelo e-mail indicado na seção de contato.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="s6">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-num">06</div>
+          <h2>Retenção de Dados</h2>
+        </div>
+        <div class="section-body">
+          <p>Mantemos seus dados pessoais apenas pelo tempo necessário para as finalidades descritas nesta política ou conforme exigido por lei.</p>
+          <p>Após a exclusão da conta, todos os dados são removidos permanentemente de nossos servidores em até <strong>30 dias</strong>, exceto nos casos em que a retenção seja obrigatória por legislação fiscal, contábil ou de combate à fraude.</p>
+          <p>Dados de logs de segurança e transações financeiras podem ser mantidos por até <strong>5 anos</strong> conforme exigência legal.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="s7">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-num">07</div>
+          <h2>Menores de Idade</h2>
+        </div>
+        <div class="section-body">
+          <p>O PlanGYM não é direcionado a pessoas com menos de 16 anos e não coleta intencionalmente dados de menores de idade sem o consentimento expresso dos pais ou responsáveis legais.</p>
+          <div class="warn">
+            Se você acredita que um menor forneceu dados pessoais sem autorização, entre em contato conosco imediatamente para que possamos remover as informações.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="s8">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-num">08</div>
+          <h2>Contato e Encarregado de Dados</h2>
+        </div>
+        <div class="section-body">
+          <p>Para dúvidas, solicitações ou exercício de direitos relacionados à privacidade dos seus dados, entre em contato com nossa equipe:</p>
+          <div class="contact-grid">
+            <div class="contact-item">
+              <div class="c-label">E-mail</div>
+              <div class="c-value">privacidade@plangym.app</div>
+            </div>
+            <div class="contact-item">
+              <div class="c-label">Aplicativo</div>
+              <div class="c-value">Perfil → Ajuda</div>
+            </div>
+            <div class="contact-item">
+              <div class="c-label">Prazo de resposta</div>
+              <div class="c-value">Até 15 dias úteis</div>
+            </div>
+          </div>
+          <p style="margin-top: 20px;">Esta política pode ser atualizada periodicamente. Alterações significativas serão comunicadas via notificação no aplicativo. O uso continuado do PlanGYM após as alterações implica na aceitação da nova política.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <a class="logo" href="#">
+          <div class="logo-icon" style="width:24px;height:24px;border-radius:6px;">
+            <svg viewBox="0 0 24 24" style="width:13px;height:13px;" fill="white"><path d="M6 4v6m0 4v6M18 4v6m0 4v6M2 10h4m12 0h4M2 14h4m12 0h4M10 10h4v4h-4z"/></svg>
+          </div>
+          <span class="logo-name" style="font-size:13px;">Plan<span>GYM</span></span>
+        </a>
+        <div class="footer-divider"></div>
+        <span class="footer-copy">© 2026 PlanGYM. Todos os direitos reservados.</span>
+      </div>
+      <div class="footer-right">
+        Protegido pela <span>LGPD</span> · Lei nº 13.709/2018
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
