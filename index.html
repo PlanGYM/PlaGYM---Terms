@@ -19,7 +19,6 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -30,9 +29,13 @@
       line-height: 1.8;
       min-height: 100vh;
       overflow-x: hidden;
+      /* Desabilita seleção de texto */
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
 
-    /* ── Background grid ─────────────────────────────────────────── */
     body::before {
       content: '';
       position: fixed;
@@ -45,35 +48,18 @@
       z-index: 0;
     }
 
-    /* ── Glow orbs ───────────────────────────────────────────────── */
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(120px);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .orb-1 {
-      width: 600px; height: 600px;
-      background: rgba(19,127,236,0.12);
-      top: -200px; left: -200px;
-    }
-    .orb-2 {
-      width: 500px; height: 500px;
-      background: rgba(13,242,89,0.06);
-      bottom: 20%; right: -150px;
-    }
+    .orb { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; }
+    .orb-1 { width: 600px; height: 600px; background: rgba(19,127,236,0.12); top: -200px; left: -200px; }
+    .orb-2 { width: 500px; height: 500px; background: rgba(13,242,89,0.06); bottom: 20%; right: -150px; }
 
-    /* ── Header ──────────────────────────────────────────────────── */
     header {
-      position: relative;
+      position: sticky;
+      top: 0;
       z-index: 10;
       padding: 0 24px;
       border-bottom: 1px solid var(--border);
       background: rgba(8,12,20,0.8);
       backdrop-filter: blur(20px);
-      position: sticky;
-      top: 0;
     }
 
     .header-inner {
@@ -85,12 +71,7 @@
       justify-content: space-between;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
 
     .logo-icon {
       width: 32px; height: 32px;
@@ -112,16 +93,8 @@
     }
 
     .logo-name span { color: var(--blue); }
+    .header-badge { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
 
-    .header-badge {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--muted);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    /* ── Hero ────────────────────────────────────────────────────── */
     .hero {
       position: relative;
       z-index: 1;
@@ -148,12 +121,7 @@
       animation: fadeUp 0.6s ease forwards 0.1s;
     }
 
-    .hero-tag::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--blue);
-      border-radius: 50%;
-    }
+    .hero-tag::before { content: ''; width: 6px; height: 6px; background: var(--blue); border-radius: 50%; }
 
     .hero h1 {
       font-family: 'Lexend Mega', sans-serif;
@@ -166,10 +134,7 @@
       animation: fadeUp 0.6s ease forwards 0.2s;
     }
 
-    .hero h1 em {
-      font-style: normal;
-      color: var(--blue);
-    }
+    .hero h1 em { font-style: normal; color: var(--blue); }
 
     .hero-sub {
       margin-top: 20px;
@@ -190,23 +155,10 @@
       animation: fadeUp 0.6s ease forwards 0.5s;
     }
 
-    .meta-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
+    .meta-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
     .meta-item svg { width: 14px; height: 14px; stroke: var(--muted); fill: none; }
+    .meta-dot { width: 3px; height: 3px; background: var(--border); border-radius: 50%; }
 
-    .meta-dot {
-      width: 3px; height: 3px;
-      background: var(--border);
-      border-radius: 50%;
-    }
-
-    /* ── TOC ─────────────────────────────────────────────────────── */
     .toc-bar {
       position: relative;
       z-index: 1;
@@ -227,15 +179,7 @@
       gap: 10px;
     }
 
-    .toc-label {
-      width: 100%;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--muted);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
+    .toc-label { width: 100%; font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
 
     .toc-link {
       display: inline-flex;
@@ -252,55 +196,24 @@
       transition: all 0.2s;
     }
 
-    .toc-link:hover {
-      background: rgba(19,127,236,0.14);
-      border-color: rgba(19,127,236,0.35);
-      transform: translateY(-1px);
-    }
+    .toc-link:hover { background: rgba(19,127,236,0.14); border-color: rgba(19,127,236,0.35); transform: translateY(-1px); }
 
-    /* ── Main content ────────────────────────────────────────────── */
-    main {
-      position: relative;
-      z-index: 1;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 24px 80px;
-    }
+    main { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
 
-    .section {
-      margin-bottom: 12px;
-      opacity: 0;
-      animation: fadeUp 0.5s ease forwards;
-    }
+    .section { margin-bottom: 12px; opacity: 0; animation: fadeUp 0.5s ease forwards; }
+    .section:nth-child(1) { animation-delay: 0.65s; }
+    .section:nth-child(2) { animation-delay: 0.72s; }
+    .section:nth-child(3) { animation-delay: 0.79s; }
+    .section:nth-child(4) { animation-delay: 0.86s; }
+    .section:nth-child(5) { animation-delay: 0.93s; }
+    .section:nth-child(6) { animation-delay: 1.00s; }
+    .section:nth-child(7) { animation-delay: 1.07s; }
+    .section:nth-child(8) { animation-delay: 1.14s; }
 
-    .section:nth-child(1)  { animation-delay: 0.65s; }
-    .section:nth-child(2)  { animation-delay: 0.72s; }
-    .section:nth-child(3)  { animation-delay: 0.79s; }
-    .section:nth-child(4)  { animation-delay: 0.86s; }
-    .section:nth-child(5)  { animation-delay: 0.93s; }
-    .section:nth-child(6)  { animation-delay: 1.00s; }
-    .section:nth-child(7)  { animation-delay: 1.07s; }
-    .section:nth-child(8)  { animation-delay: 1.14s; }
+    .section-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: border-color 0.3s; }
+    .section-card:hover { border-color: rgba(19,127,236,0.25); }
 
-    .section-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: border-color 0.3s;
-    }
-
-    .section-card:hover {
-      border-color: rgba(19,127,236,0.25);
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 24px 28px 20px;
-      border-bottom: 1px solid var(--border);
-    }
+    .section-header { display: flex; align-items: center; gap: 16px; padding: 24px 28px 20px; border-bottom: 1px solid var(--border); }
 
     .section-num {
       width: 36px; height: 36px;
@@ -316,38 +229,14 @@
       flex-shrink: 0;
     }
 
-    .section-header h2 {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.3px;
-    }
+    .section-header h2 { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
 
-    .section-body {
-      padding: 24px 28px;
-    }
-
-    .section-body p {
-      font-size: 14px;
-      color: rgba(232,239,248,0.75);
-      line-height: 1.85;
-      margin-bottom: 14px;
-    }
-
+    .section-body { padding: 24px 28px; }
+    .section-body p { font-size: 14px; color: rgba(232,239,248,0.75); line-height: 1.85; margin-bottom: 14px; }
     .section-body p:last-child { margin-bottom: 0; }
+    .section-body strong { color: var(--text); font-weight: 600; }
 
-    .section-body strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    /* ── Pill list ───────────────────────────────────────────────── */
-    .pill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 16px 0;
-    }
+    .pill-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
 
     .pill {
       display: inline-flex;
@@ -362,15 +251,8 @@
       color: var(--text);
     }
 
-    .pill::before {
-      content: '';
-      width: 5px; height: 5px;
-      background: var(--blue);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
+    .pill::before { content: ''; width: 5px; height: 5px; background: var(--blue); border-radius: 50%; flex-shrink: 0; }
 
-    /* ── Highlight box ───────────────────────────────────────────── */
     .highlight {
       background: rgba(19,127,236,0.06);
       border: 1px solid rgba(19,127,236,0.18);
@@ -383,7 +265,6 @@
       line-height: 1.7;
     }
 
-    /* ── Warning box ─────────────────────────────────────────────── */
     .warn {
       background: rgba(255,77,109,0.06);
       border: 1px solid rgba(255,77,109,0.20);
@@ -396,95 +277,31 @@
       line-height: 1.7;
     }
 
-    /* ── Contact card ────────────────────────────────────────────── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
-      margin-top: 8px;
-    }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 8px; }
 
-    .contact-item {
-      background: rgba(19,127,236,0.05);
-      border: 1px solid rgba(19,127,236,0.14);
-      border-radius: 14px;
-      padding: 16px 18px;
-    }
+    .contact-item { background: rgba(19,127,236,0.05); border: 1px solid rgba(19,127,236,0.14); border-radius: 14px; padding: 16px 18px; }
+    .contact-item .c-label { font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 6px; }
+    .contact-item .c-value { font-size: 14px; font-weight: 500; color: var(--blue); }
 
-    .contact-item .c-label {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--muted);
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 32px 24px; }
 
-    .contact-item .c-value {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--blue);
-    }
+    .footer-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-left { display: flex; align-items: center; gap: 12px; }
+    .footer-copy { font-size: 12px; color: var(--muted); }
+    .footer-divider { width: 1px; height: 14px; background: var(--border); }
+    .footer-right { font-size: 12px; color: var(--muted); }
+    .footer-right span { color: var(--blue); }
 
-    /* ── Footer ──────────────────────────────────────────────────── */
-    footer {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--border);
-      padding: 32px 24px;
-    }
-
-    .footer-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .footer-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .footer-copy {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .footer-divider {
-      width: 1px; height: 14px;
-      background: var(--border);
-    }
-
-    .footer-right {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .footer-right span {
-      color: var(--blue);
-    }
-
-    /* ── Animations ──────────────────────────────────────────────── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── Scrollbar ───────────────────────────────────────────────── */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--dark); }
-    ::-webkit-scrollbar-thumb {
-      background: var(--border);
-      border-radius: 3px;
-    }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
-    /* ── Responsive ──────────────────────────────────────────────── */
     @media (max-width: 600px) {
       .hero { padding: 48px 20px 40px; }
       .section-header { padding: 20px; }
@@ -493,9 +310,39 @@
       .hero-meta { gap: 12px; }
       .meta-dot { display: none; }
     }
+
+    /* Overlay de proteção para DevTools */
+    #devtools-warning {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--dark);
+      z-index: 99999;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+    }
+    #devtools-warning p {
+      color: var(--danger);
+      font-family: 'Lexend', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    #devtools-warning small {
+      color: var(--muted);
+      font-family: 'Lexend', sans-serif;
+      font-size: 13px;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Overlay DevTools -->
+  <div id="devtools-warning">
+    <p>⚠️ Acesso não autorizado</p>
+    <small>As ferramentas de desenvolvedor estão desabilitadas nesta página.</small>
+  </div>
 
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
@@ -505,7 +352,8 @@
     <div class="header-inner">
       <a class="logo" href="#">
         <div class="logo-icon">
-          <svg viewBox="0 0 24 24"><path d="M6 4v6m0 4v6M18 4v6m0 4v6M2 10h4m12 0h4M2 14h4m12 0h4M10 10h4v4h-4z"/></svg>
+          <!-- Ícone haltere sem o ponto central -->
+          <svg viewBox="0 0 24 24"><path d="M6 4v6m0 4v6M18 4v6m0 4v6M2 10h4m12 0h4M2 14h4m12 0h4"/></svg>
         </div>
         <span class="logo-name">Plan<span>GYM</span></span>
       </a>
@@ -703,7 +551,7 @@
           <div class="contact-grid">
             <div class="contact-item">
               <div class="c-label">E-mail</div>
-              <div class="c-value">privacidade@plangym.app</div>
+              <div class="c-value">plangymcontato@gmail.com</div>
             </div>
             <div class="contact-item">
               <div class="c-label">Aplicativo</div>
@@ -727,7 +575,9 @@
       <div class="footer-left">
         <a class="logo" href="#">
           <div class="logo-icon" style="width:24px;height:24px;border-radius:6px;">
-            <svg viewBox="0 0 24 24" style="width:13px;height:13px;" fill="white"><path d="M6 4v6m0 4v6M18 4v6m0 4v6M2 10h4m12 0h4M2 14h4m12 0h4M10 10h4v4h-4z"/></svg>
+            <svg viewBox="0 0 24 24" style="width:13px;height:13px;" fill="white">
+              <path d="M6 4v6m0 4v6M18 4v6m0 4v6M2 10h4m12 0h4M2 14h4m12 0h4"/>
+            </svg>
           </div>
           <span class="logo-name" style="font-size:13px;">Plan<span>GYM</span></span>
         </a>
@@ -739,6 +589,59 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // ── 1. Bloqueia menu de contexto (botão direito) ───────────────────────
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+      return false;
+    });
+
+    // ── 2. Bloqueia atalhos de teclado do DevTools e copiar ───────────────
+    document.addEventListener('keydown', function(e) {
+      // F12
+      if (e.key === 'F12') { e.preventDefault(); return false; }
+      // Ctrl+Shift+I / Cmd+Option+I
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'I') { e.preventDefault(); return false; }
+      // Ctrl+Shift+J
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'J') { e.preventDefault(); return false; }
+      // Ctrl+Shift+C
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'C') { e.preventDefault(); return false; }
+      // Ctrl+U (ver fonte)
+      if ((e.ctrlKey || e.metaKey) && e.key === 'u') { e.preventDefault(); return false; }
+      // Ctrl+S (salvar página)
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); return false; }
+      // Ctrl+C (copiar)
+      if ((e.ctrlKey || e.metaKey) && e.key === 'c') { e.preventDefault(); return false; }
+      // Ctrl+A (selecionar tudo)
+      if ((e.ctrlKey || e.metaKey) && e.key === 'a') { e.preventDefault(); return false; }
+    });
+
+    // ── 3. Detecta abertura do DevTools e exibe aviso ─────────────────────
+    (function detectDevTools() {
+      const threshold = 160;
+      const warning = document.getElementById('devtools-warning');
+
+      function check() {
+        const widthDiff  = window.outerWidth  - window.innerWidth  > threshold;
+        const heightDiff = window.outerHeight - window.innerHeight > threshold;
+        if (widthDiff || heightDiff) {
+          warning.style.display = 'flex';
+        } else {
+          warning.style.display = 'none';
+        }
+      }
+
+      setInterval(check, 1000);
+      window.addEventListener('resize', check);
+
+      // Técnica debugger loop — torna a aba inutilizável com DevTools aberto
+      (function loop() {
+        (function() {}).constructor('debugger')();
+        requestAnimationFrame(loop);
+      })();
+    })();
+  </script>
 
 </body>
 </html>
